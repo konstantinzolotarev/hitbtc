@@ -3,7 +3,7 @@ defmodule Hitbtc.Util.Api do
 
   use HTTPoison.Base
 
-  @host Application.get_env(:hitbtc, :host, "https://api.hitbtc.com/")
+  @host Application.get_env(:hitbtc, :api_url, "https://api.hitbtc.com/api/2")
   @timeout Application.get_env(:hitbtc, :request_timeout, 8000)
 
   def host, do: @host
@@ -36,6 +36,7 @@ defmodule Hitbtc.Util.Api do
 
   defp fetch_body({:ok, %HTTPoison.Response{status_code: 200, body: body}}), do: {:ok, body}
   defp fetch_body({:ok, %HTTPoison.Response{status_code: 201, body: body}}), do: {:ok, body}
+  defp fetch_body({:ok, %HTTPoison.Response{body: %{error: error}}}), do: {:error, error}
   defp fetch_body({:error, err}), do: {:error, err}
   defp fetch_body(_), do: {:error, "Something wrong !"}
 
