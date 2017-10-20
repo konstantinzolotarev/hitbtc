@@ -10,7 +10,7 @@ defmodule Hitbtc.Mixfile do
       app: :hitbtc,
       version: "0.1.0",
       elixir: "~> 1.3",
-      name: "HitBTC",
+      name: "HitBTC REST API",
       description: @description,
       docs: [extras: ["README.md"]],
       start_permanent: Mix.env == :prod,
