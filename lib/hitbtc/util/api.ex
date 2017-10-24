@@ -5,6 +5,8 @@ defmodule Hitbtc.Util.Api do
 
   @host Application.get_env(:hitbtc, :api_url, "https://api.hitbtc.com/api/2")
   @timeout Application.get_env(:hitbtc, :request_timeout, 8000)
+  @apiKey Application.get_env(:hitbtc, :api_key, "")
+  @apiSecret Application.get_env(:hitbtc, :api_secret, "")
 
   def host, do: @host
   def process_url(url), do: @host <> url
@@ -32,7 +34,21 @@ defmodule Hitbtc.Util.Api do
   Fetch only actual body from request with specified params
   """
   @spec get_body(String.t, [tuple]) :: {:ok, any} | {:error, any}
-  def get_body(url, params), do: get(url, %{}, params: params) |> fetch_body() |> pick_data()
+  def get_body(url, params), do: get(url, %{}, options(params)) |> fetch_body() |> pick_data()
+
+  # Merge options with basic auth (if set in options)
+  defp options(params \\ []) do
+    opts = [
+      params: params
+    ] 
+
+    with true <- String.length(@apiKey) > 0,
+         true <- String.length(@apiSecret) > 0
+    do opts ++ [hackney: [basic_auth: {@apiKey, @apiSecret}]]
+    else 
+      _ -> opts
+    end
+  end
 
   defp fetch_body({:ok, %HTTPoison.Response{status_code: 200, body: body}}), do: {:ok, body}
   defp fetch_body({:ok, %HTTPoison.Response{status_code: 201, body: body}}), do: {:ok, body}
