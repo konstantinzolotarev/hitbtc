@@ -28,7 +28,7 @@ defmodule Hitbtc.Util.Api do
   Fetch only actual data from request
   """
   @spec get_body(String.t) :: {:ok, any} | {:error, any}
-  def get_body(url), do: get(url) |> fetch_body() |> pick_data()
+  def get_body(url), do: get(url, %{}, options([])) |> fetch_body() |> pick_data()
 
   @doc """
   Fetch only actual body from request with specified params
@@ -37,7 +37,7 @@ defmodule Hitbtc.Util.Api do
   def get_body(url, params), do: get(url, %{}, options(params)) |> fetch_body() |> pick_data()
 
   # Merge options with basic auth (if set in options)
-  defp options(params \\ []) do
+  defp options(params) do
     opts = [
       params: params
     ] 
