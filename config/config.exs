@@ -3,3 +3,5 @@
 use Mix.Config
 
 config :hitbtc, api_url: "https://api.hitbtc.com/api/2"
+
+import_config "config_local.exs"
