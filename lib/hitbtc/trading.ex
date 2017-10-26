@@ -86,4 +86,16 @@ defmodule Hitbtc.Trading do
   @spec trading_balance() :: {:ok, [map]} | {:error, any}
   def trading_balance, do: Api.get_body("/trading/balance")
 
+  @doc """
+  Get trading fee for given symbol
+
+  ## Example
+  ```elixir
+  iex(1)> Hitbtc.Trading.trading_fee("ETHBTC")
+  {:ok, %{provideLiquidityRate: "-0.0001", takeLiquidityRate: "0.001"}}
+  ```
+  """
+  @spec trading_fee(String.t) :: {:ok, map} | {:error, any}
+  def trading_fee(symbol), do: Api.get_body("/trading/fee/#{symbol}")
+
 end
