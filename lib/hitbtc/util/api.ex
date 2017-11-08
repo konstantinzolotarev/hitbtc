@@ -25,16 +25,45 @@ defmodule Hitbtc.Util.Api do
   end
 
   @doc """
-  Fetch only actual data from request
-  """
-  @spec get_body(String.t) :: {:ok, any} | {:error, any}
-  def get_body(url), do: get(url, %{}, options([])) |> fetch_body() |> pick_data()
-
-  @doc """
   Fetch only actual body from request with specified params
   """
   @spec get_body(String.t, [tuple]) :: {:ok, any} | {:error, any}
-  def get_body(url, params), do: get(url, %{}, options(params)) |> fetch_body() |> pick_data()
+  def get_body(url, params \\ []), do: get(url, %{}, options(params)) |> fetch_body() |> pick_data()
+
+  @doc """
+  Fetch only actual body from POST request to API server
+  """
+  @spec post_body(String.t, map, [tuple]) :: {:ok, any} | {:error, any}
+  def post_body(url, body, params \\ []) do
+    post(url, body, [], options(params))
+    |> fetch_body()
+    |> pick_data()
+  end
+
+  @doc """
+  Fetch only an actual body from PUT request to API server
+  """
+  @spec put_body(String.t, map, [tuple]) :: {:ok, any} | {:error, any}
+  def put_body(url, body, params \\ []) do
+    put(url, body, [], options(params))
+    |> fetch_body()
+    |> pick_data()
+  end
+
+  @doc """
+  Fethc only actual body form PATCH request to API server
+  """
+  @spec patch_body(String.t, map, [tuple]) :: {:ok, any} | {:error, any}
+  def patch_body(url, body, params \\ []) do
+    patch(url, body, [], options(params))
+    |> fetch_body()
+    |> pick_data()
+  end
+  @doc """
+  Fetch only actual body from DELETE request to server
+  """
+  @spec delete_body(String.t, [tuple]) :: {:ok, any} | {:error, any}
+  def delete_body(url, params \\ []), do: delete(url, [], options(params)) |> fetch_body() |> pick_data()
 
   # Merge options with basic auth (if set in options)
   defp options(params) do
