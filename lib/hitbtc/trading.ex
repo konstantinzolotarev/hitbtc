@@ -43,6 +43,24 @@ defmodule Hitbtc.Trading do
   def order(symbol \\ ""), do: Api.get_body("/order", [symbol: symbol])
 
   @doc """
+  Closes all orders.
+  If symbol passed orders will be closed for given symbol only.
+
+  ## Example:
+  ```elixir
+  iex(1)> Hitbtc.Trading.close_all_ordes()
+  {:ok,
+    [%{clientOrderId: "fe423a1615d6429dafa6549780615155",
+      createdAt: "2017-10-26T05:47:22.520Z", cumQuantity: "0.000",
+      id: "4645665806", price: "1.000000", quantity: "0.050", side: "sell",
+      status: "canceled", symbol: "ETHBTC", timeInForce: "GTC", type: "limit",
+      updatedAt: "2017-11-07T12:02:41.518Z"}]}
+  ```
+  """
+  @spec cancel_all_orders(String.t) :: {:ok, [map]} | {:error, any}
+  def cancel_all_orders(symbol \\ ""), do: Api.delete_body("/order", [symbol: symbol])
+
+  @doc """
   Load details of your order
 
   ## Example
@@ -65,6 +83,23 @@ defmodule Hitbtc.Trading do
   """
   @spec get_order(String.t) :: {:ok, map} | {:error, any}
   def get_order(clientOrderId), do: Api.get_body("/order/#{clientOrderId}")
+
+  @doc """
+  Close order with given clientOrderId
+
+  ## Example:
+  ```elixir
+
+  ```
+  
+  Or with non existing order
+  ```elixir
+  iex(1)> Hitbtc.Trading.cancel_order("fe423a1615d6429dafa6549780615155")
+  {:error, %{code: 20002, description: "", message: "Order not found"}}
+  ```
+  """
+  @spec cancel_order(String.t) :: {:ok, map} | {:error, any}
+  def cancel_order(clientOrderId), do: Api.delete_body("/order/#{clientOrderId}")
 
   @doc """
   Get list of your trading balance
