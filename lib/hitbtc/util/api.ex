@@ -15,9 +15,6 @@ defmodule Hitbtc.Util.Api do
   defp process_request_options([timeout: _t] = opts), do: opts
   defp process_request_options(opts), do: Keyword.merge(opts, [timeout: @timeout])
 
-  defp process_request_body(req) when is_binary(req), do: req
-  defp process_request_body(req), do: Poison.encode!(req)
-
   defp process_response_body(""), do: ""
   defp process_response_body(body) do
     body
@@ -33,9 +30,10 @@ defmodule Hitbtc.Util.Api do
   @doc """
   Fetch only actual body from POST request to API server
   """
-  @spec post_body(String.t, map, [tuple]) :: {:ok, any} | {:error, any}
+  @spec post_body(String.t, [tuple], [tuple]) :: {:ok, any} | {:error, any}
   def post_body(url, body, params \\ []) do
-    post(url, body, [], options(params))
+    params = params ++ ["Content-type": "application/x-www-form-urlencoded"]
+    post(url, {:form, body}, [], options(params))
     |> fetch_body()
     |> pick_data()
   end
