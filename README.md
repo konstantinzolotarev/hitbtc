@@ -47,6 +47,26 @@ config :hitbtc, api_secret: "api-secret-here"
 
 ## Usage
 
+Client contain set of actions for public usage (non account related).
+And this actions could be used without auth config.
+
+All public action are into `Hitbtc.Public`. All other methods require auth configuration.
+
+Usage example:
+
+```elixir
+iex(1)> Hitbtc.Public.symbol_list
+{:ok,
+  [%{baseCurrency: "BCN", feeCurrency: "BTC", id: "BCNBTC",
+    provideLiquidityRate: "-0.0001", quantityIncrement: "100",
+    quoteCurrency: "BTC", takeLiquidityRate: "0.001", tickSize: "0.0000000001"},
+   %{baseCurrency: "BTC", feeCurrency: "EUR", id: "BTCEUR",
+     provideLiquidityRate: "-0.0001", quantityIncrement: "0.01",
+     quoteCurrency: "EUR", takeLiquidityRate: "0.001", tickSize: "0.01"},
+   %{baseCurrency: "DCT", feeCurrency: "BTC", ...}, %{baseCurrency: "ANT", ...},
+   %{...}, ...]}
+```
+
 ## License
 
 ```
