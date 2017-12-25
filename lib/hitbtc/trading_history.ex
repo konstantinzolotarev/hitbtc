@@ -32,7 +32,7 @@ defmodule Hitbtc.TradingHistory do
   {:ok, []}
   ```
   """
-  @spec order([tuple]) :: {:ok, [map]} | {:error, any}
+  @spec order([tuple]) :: {:ok, [map]} | {:error, term}
   def order(params \\ []), do: Api.get_body("/history/order", params)
 
   @doc """
@@ -55,7 +55,7 @@ defmodule Hitbtc.TradingHistory do
   {:ok, []}
   ```
   """
-  @spec trades([tuple]) :: {:ok, [map]} | {:error, any}
+  @spec trades([tuple]) :: {:ok, [map]} | {:error, term}
   def trades(params \\ []), do: Api.get_body("/history/trades", params)
 
   @doc """
@@ -68,6 +68,6 @@ defmodule Hitbtc.TradingHistory do
   {:ok, []}
   ```
   """
-  @spec order_trades(String.t) :: {:ok, [map]} | {:error, any}
+  @spec order_trades(String.t) :: {:ok, [map]} | {:error, term}
   def order_trades(orderId), do: Api.get_body("/history/order/#{orderId}/trades")
 end

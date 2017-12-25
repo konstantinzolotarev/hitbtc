@@ -24,7 +24,7 @@ defmodule Hitbtc.Public do
      %{...}, ...]}
   ```
   """
-  @spec symbol_list() :: {:ok, [map]} | {:error, any}
+  @spec symbol_list() :: {:ok, [map]} | {:error, term}
   def symbol_list, do: Api.get_body("/public/symbol")
 
   @doc """
@@ -49,7 +49,7 @@ defmodule Hitbtc.Public do
       message: "Symbol not found"}}
   ```
   """
-  @spec symbol(String.t) :: {:ok, map} | {:error, any}
+  @spec symbol(String.t) :: {:ok, map} | {:error, term}
   def symbol(symbol), do: Api.get_body("/public/symbol/#{symbol}")
 
   @doc """
@@ -70,7 +70,7 @@ defmodule Hitbtc.Public do
      ...]}
   ```
   """
-  @spec currency() :: {:ok, [map]} | {:error, any}
+  @spec currency() :: {:ok, [map]} | {:error, term}
   def currency, do: Api.get_body("/public/currency")
 
   @doc """
@@ -93,7 +93,7 @@ defmodule Hitbtc.Public do
   {:error, %{code: 2002, description: "", message: "Currency not found"}}
   ```
   """
-  @spec currency(String.t) :: {:ok, map} | {:error, any}
+  @spec currency(String.t) :: {:ok, map} | {:error, term}
   def currency(currency), do: Api.get_body("/public/currency/#{currency}")
 
   @doc """
@@ -117,7 +117,7 @@ defmodule Hitbtc.Public do
      ...]}
   ```
   """
-  @spec ticker() :: {:ok, [map]} | {:error, any}
+  @spec ticker() :: {:ok, [map]} | {:error, term}
   def ticker, do: Api.get_body("/public/ticker")
 
   @doc """
@@ -144,7 +144,7 @@ defmodule Hitbtc.Public do
       message: "Symbol not found"}}
   ```
   """
-  @spec ticker(String.t) :: {:ok, map} | {:error, any}
+  @spec ticker(String.t) :: {:ok, map} | {:error, term}
   def ticker(symbol), do: Api.get_body("/public/ticker/#{symbol}")
 
   @doc """
@@ -195,7 +195,7 @@ defmodule Hitbtc.Public do
       message: "Symbol not found"}}
   ```
   """
-  @spec trades(String.t, [tuple]) :: {:ok, [map]} | {:error, any}
+  @spec trades(String.t, [tuple]) :: {:ok, [map]} | {:error, term}
   def trades(symbol, params \\ []), do: Api.get_body("/public/trades/#{symbol}", params)
 
   @doc """
@@ -227,7 +227,7 @@ defmodule Hitbtc.Public do
             %{price: "0.053800", size: "0.597"}]}}
   ```
   """
-  @spec order_book(String.t, integer) :: {:ok, [map]} | {:error, any}
+  @spec order_book(String.t, integer) :: {:ok, [map]} | {:error, term}
   def order_book(symbol, limit \\ 100), do: Api.get_body("/public/orderbook/#{symbol}", [limit: limit]) 
 
   @doc """
@@ -251,6 +251,6 @@ defmodule Hitbtc.Public do
        volumeQuote: "11.721044320"}]}
   ```
   """
-  @spec candles(String.t, [tuple]) :: {:ok, [map]} | {:error, any}
+  @spec candles(String.t, [tuple]) :: {:ok, [map]} | {:error, term}
   def candles(symbol, params \\ []), do: Api.get_body("/public/candles/#{symbol}", params)
 end

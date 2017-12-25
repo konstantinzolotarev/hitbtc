@@ -39,7 +39,7 @@ defmodule Hitbtc.Trading do
       message: "Symbol not found"}}
   ```
   """
-  @spec order(String.t) :: {:ok, [map]} | {:error, any}
+  @spec order(String.t) :: {:ok, [map]} | {:error, term}
   def order(symbol \\ ""), do: Api.get_body("/order", [symbol: symbol])
 
   @doc """
@@ -57,7 +57,7 @@ defmodule Hitbtc.Trading do
       updatedAt: "2017-11-07T12:02:41.518Z"}]}
   ```
   """
-  @spec cancel_all_orders(String.t) :: {:ok, [map]} | {:error, any}
+  @spec cancel_all_orders(String.t) :: {:ok, [map]} | {:error, term}
   def cancel_all_orders(symbol \\ ""), do: Api.delete_body("/order", [symbol: symbol])
 
   @doc """
@@ -81,7 +81,7 @@ defmodule Hitbtc.Trading do
   {:error, %{code: 20002, description: "", message: "Order not found"}}
   ```
   """
-  @spec get_order(String.t) :: {:ok, map} | {:error, any}
+  @spec get_order(String.t) :: {:ok, map} | {:error, term}
   def get_order(clientOrderId), do: Api.get_body("/order/#{clientOrderId}")
 
   @doc """
@@ -98,7 +98,7 @@ defmodule Hitbtc.Trading do
   {:error, %{code: 20002, description: "", message: "Order not found"}}
   ```
   """
-  @spec cancel_order(String.t) :: {:ok, map} | {:error, any}
+  @spec cancel_order(String.t) :: {:ok, map} | {:error, term}
   def cancel_order(clientOrderId), do: Api.delete_body("/order/#{clientOrderId}")
 
   @doc """
@@ -118,7 +118,7 @@ defmodule Hitbtc.Trading do
      %{available: "0", currency: "DLT", ...}, %{available: "0", ...}, %{...}, ...]}
   ```
   """
-  @spec trading_balance() :: {:ok, [map]} | {:error, any}
+  @spec trading_balance() :: {:ok, [map]} | {:error, term}
   def trading_balance, do: Api.get_body("/trading/balance")
 
   @doc """
@@ -130,7 +130,7 @@ defmodule Hitbtc.Trading do
   {:ok, %{provideLiquidityRate: "-0.0001", takeLiquidityRate: "0.001"}}
   ```
   """
-  @spec trading_fee(String.t) :: {:ok, map} | {:error, any}
+  @spec trading_fee(String.t) :: {:ok, map} | {:error, term}
   def trading_fee(symbol), do: Api.get_body("/trading/fee/#{symbol}")
 
 end

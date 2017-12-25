@@ -24,13 +24,13 @@ defmodule Hitbtc.Util.Api do
   @doc """
   Fetch only actual body from request with specified params
   """
-  @spec get_body(String.t, [tuple]) :: {:ok, any} | {:error, any}
+  @spec get_body(String.t, [tuple]) :: {:ok, term} | {:error, term}
   def get_body(url, params \\ []), do: get(url, %{}, options(params)) |> fetch_body() |> pick_data()
 
   @doc """
   Fetch only actual body from POST request to API server
   """
-  @spec post_body(String.t, [tuple], [tuple]) :: {:ok, any} | {:error, any}
+  @spec post_body(String.t, [tuple], [tuple]) :: {:ok, term} | {:error, term}
   def post_body(url, body, params \\ []) do
     params = params ++ ["Content-type": "application/x-www-form-urlencoded"]
     post(url, {:form, body}, [], options(params))
@@ -41,7 +41,7 @@ defmodule Hitbtc.Util.Api do
   @doc """
   Fetch only an actual body from PUT request to API server
   """
-  @spec put_body(String.t, map, [tuple]) :: {:ok, any} | {:error, any}
+  @spec put_body(String.t, map, [tuple]) :: {:ok, term} | {:error, term}
   def put_body(url, body, params \\ []) do
     put(url, body, [], options(params))
     |> fetch_body()
@@ -51,7 +51,7 @@ defmodule Hitbtc.Util.Api do
   @doc """
   Fethc only actual body form PATCH request to API server
   """
-  @spec patch_body(String.t, map, [tuple]) :: {:ok, any} | {:error, any}
+  @spec patch_body(String.t, map, [tuple]) :: {:ok, term} | {:error, term}
   def patch_body(url, body, params \\ []) do
     patch(url, body, [], options(params))
     |> fetch_body()
@@ -60,7 +60,7 @@ defmodule Hitbtc.Util.Api do
   @doc """
   Fetch only actual body from DELETE request to server
   """
-  @spec delete_body(String.t, [tuple]) :: {:ok, any} | {:error, any}
+  @spec delete_body(String.t, [tuple]) :: {:ok, term} | {:error, term}
   def delete_body(url, params \\ []), do: delete(url, [], options(params)) |> fetch_body() |> pick_data()
 
   # Merge options with basic auth (if set in options)

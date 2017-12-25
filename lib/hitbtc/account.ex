@@ -22,7 +22,7 @@ defmodule Hitbtc.Account do
      %{available: "0.00000000", ...}, %{...}, ...]}
   ```
   """
-  @spec balance() :: {:ok, [map]} | {:error, any}
+  @spec balance() :: {:ok, [map]} | {:error, term}
   def balance(), do: Api.get_body("/account/balance")
 
   @doc """
@@ -34,7 +34,7 @@ defmodule Hitbtc.Account do
   {:ok, %{address: "0xe2be99cf4d3b1ce48ae0f7c5f8a508be9b62d5e0"}}
   ```
   """
-  @spec deposit_address_get(String.t) :: {:ok, map} | {:error, any}
+  @spec deposit_address_get(String.t) :: {:ok, map} | {:error, term}
   def deposit_address_get(currency), do: Api.get_body("/account/crypto/address/#{currency}")
 
   @doc """
@@ -46,7 +46,7 @@ defmodule Hitbtc.Account do
   {:ok, %{address: "GV2PQ4cmrC6zJZJQzfpLZze8D6KGM2piec"}}
   ```
   """
-  @spec deposit_address_new(String.t) :: {:ok, map} | {:error, any}
+  @spec deposit_address_new(String.t) :: {:ok, map} | {:error, term}
   def deposit_address_new(currency), do: Api.post_body("/account/crypto/address/#{currency}", %{})
 
   @doc """
@@ -67,7 +67,7 @@ defmodule Hitbtc.Account do
   {:ok, %{id: "d2ce578f-647d-4fa0-b1aa-4a27e5ee597b"}}
   ```
   """
-  @spec withdraw(String.t, float, String.t, [tuple]) :: {:ok, map} | {:error, any}
+  @spec withdraw(String.t, float, String.t, [tuple]) :: {:ok, map} | {:error, term}
   def withdraw(currency, amount, address, params \\ []) do
     body = [
       currency: currency,
@@ -86,7 +86,7 @@ defmodule Hitbtc.Account do
   {:ok, %{result: true}}
   ```
   """
-  @spec withdraw_commit(String.t) :: {:ok, map} | {:error, any}
+  @spec withdraw_commit(String.t) :: {:ok, map} | {:error, term}
   def withdraw_commit(id), do: Api.put_body("/account/crypto/withdraw/#{id}", %{})
 
   @doc """
@@ -98,7 +98,7 @@ defmodule Hitbtc.Account do
   {:ok, %{result: true}}
   ```
   """
-  @spec withdraw_cancel(String.t) :: {:ok, map} | {:error, any}
+  @spec withdraw_cancel(String.t) :: {:ok, map} | {:error, term}
   def withdraw_cancel(id), do: Api.delete_body("/account/crypto/withdraw/#{id}")
 
   @doc """
@@ -119,7 +119,7 @@ defmodule Hitbtc.Account do
   {:ok, %{id: "d2ce578f-647d-4fa0-b1aa-4a27e5ee597b"}}
   ```
   """
-  @spec transfer(String.t, float, String.t) :: {:ok, map} | {:error, any}
+  @spec transfer(String.t, float, String.t) :: {:ok, map} | {:error, term}
   def transfer(currency, amount, type \\ "bankToExchange") do
     body = [
       currency: currency,
@@ -160,7 +160,7 @@ defmodule Hitbtc.Account do
       updatedAt: "2017-12-17T09:09:16.672Z"}}
   ```
   """
-  @spec transaction_list(String.t, [tuple]) :: {:ok, [map]} | {:error, any}
+  @spec transaction_list(String.t, [tuple]) :: {:ok, [map]} | {:error, term}
   def transaction_list(id \\ "", params \\ []) do
     case id do
       "" -> Api.get_body("/account/transactions", params)
