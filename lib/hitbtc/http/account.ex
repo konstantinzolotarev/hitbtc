@@ -1,9 +1,9 @@
-defmodule Hitbtc.Account do
+defmodule Hitbtc.Http.Account do
 
   alias Hitbtc.Util.Api
 
   @moduledoc """
-  Set of account related action 
+  Set of account related action
 
   This set of methods requires auth information.
   You could configure it into `config.exs` file of your application
@@ -56,7 +56,7 @@ defmodule Hitbtc.Account do
   Be carefull about timeout.
 
   This method support set of parameters:
-   - `paymentId` - `String` 
+   - `paymentId` - `String`
    - `networkFee` - `Number` or `String` Too low and too high commission value will be rounded to valid values.
    - `includeFee` - `Boolean` Default false. If set true then total will be spent the specified amount, fee and networkFee will be deducted from the amount
    - `autoCommit` - `Boolean` Default true. If set false then you should commit or rollback transaction in an hour. Used in two phase commit schema.
@@ -108,7 +108,7 @@ defmodule Hitbtc.Account do
 
   This method has 3rd parameter `type` that indicated direction of transfer.
   And it might have this values:
-   - `bankToExchange` - Transfer from bank to exchange 
+   - `bankToExchange` - Transfer from bank to exchange
    - `exchangeToBank` - Transfer from exchange to bank
 
   ## Example:
@@ -127,10 +127,10 @@ defmodule Hitbtc.Account do
       type: type
     ]
     Api.post_body("/account/transfer", body)
-  end 
+  end
 
   @doc """
-  Get transaction history 
+  Get transaction history
 
   ## Example:
   ```elixir

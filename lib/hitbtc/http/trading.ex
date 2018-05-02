@@ -1,4 +1,4 @@
-defmodule Hitbtc.Trading do
+defmodule Hitbtc.Http.Trading do
 
   alias Hitbtc.Util.Api
 
@@ -91,7 +91,7 @@ defmodule Hitbtc.Trading do
   ```elixir
 
   ```
-  
+
   Or with non existing order
   ```elixir
   iex(1)> Hitbtc.Trading.cancel_order("fe423a1615d6429dafa6549780615155")

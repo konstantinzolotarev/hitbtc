@@ -1,4 +1,4 @@
-defmodule Hitbtc.TradingHistory do
+defmodule Hitbtc.Http.TradingHistory do
 
   alias Hitbtc.Util.Api
 
@@ -15,7 +15,7 @@ defmodule Hitbtc.TradingHistory do
   Parameters:
    - `symbol` - `String` Optional parameter to filter active orders by symbol
    - `clientOrderId` - `String` If set, other parameters will be ignored. Without limit and pagination
-   - `from` - `DateTime` 
+   - `from` - `DateTime`
    - `till` - `DateTime`
    - `limit` - `Number` Default set to 100
    - `offset` - `Number`
@@ -38,12 +38,12 @@ defmodule Hitbtc.TradingHistory do
   @doc """
   Trades history
 
-  Prameters: 
+  Prameters:
    - `symbol` - `String` Optional parameter to filter active orders by symbol
    - `sort` - `String` DESC or ASC. Default value DESC
    - `by` - `String` timestamp by default, or id
    - `from` - `DateTime`
-   - `till` - `DateTime` 
+   - `till` - `DateTime`
    - `limit` - `Number` Default to 100
    - `offset` - `Number`
 
