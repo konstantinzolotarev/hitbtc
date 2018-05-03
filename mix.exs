@@ -8,7 +8,7 @@ defmodule Hitbtc.Mixfile do
   def project do
     [
       app: :hitbtc,
-      version: "0.1.1",
+      version: "0.2.0",
       elixir: "~> 1.3",
       name: "HitBTC REST API",
       description: @description,
