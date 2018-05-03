@@ -59,7 +59,7 @@ defmodule Hitbtc.Socket.Conn do
   def handle_connect(conn, state), do: notify_consumer(state, {:connected, conn})
 
   @doc false
-  def handle_frame({:text, msg}, state) do
+  def handle_frame({:text, msg}, state) when is_binary(msg) do
     case Poison.decode(msg, keys: :atoms) do
       {:ok, data} ->
         notify_consumer(state, {:frame, :response, data})
