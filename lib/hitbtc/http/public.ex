@@ -1,4 +1,4 @@
-defmodule Hitbtc.Public do
+defmodule Hitbtc.Http.Public do
 
   alias Hitbtc.Util.Api
 
@@ -151,7 +151,7 @@ defmodule Hitbtc.Public do
   Load list of trade orders for symbol (currency pair)
 
   List of available params:
-    
+
    - `sort` - Sort direction: `ASC`, `DESC`
    - `by` - Filter field. Values: `timestamp`, `id`
    - `from` - If filter by timestamp, then datetime in iso format or timestamp in millisecond otherwise trade id
@@ -202,7 +202,7 @@ defmodule Hitbtc.Public do
   Load order book
 
   ## Example
-  
+
   ```elixir
   iex(1)> Hitbtc.Public.order_book("ETHBTC")
   {:ok,
@@ -228,13 +228,13 @@ defmodule Hitbtc.Public do
   ```
   """
   @spec order_book(String.t, integer) :: {:ok, [map]} | {:error, term}
-  def order_book(symbol, limit \\ 100), do: Api.get_body("/public/orderbook/#{symbol}", [limit: limit]) 
+  def order_book(symbol, limit \\ 100), do: Api.get_body("/public/orderbook/#{symbol}", [limit: limit])
 
   @doc """
   Load candles for symbol
 
   Available params:
-   
+
    - `limit` - Limit. Example: 100
    - `period` - `Period to load. Values: `M1`, `M3`, `M5`, `M15`, `M30`, `H1`, `H4`, `D1`, `D7`, `1M`
 
